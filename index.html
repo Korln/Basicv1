@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>My Colorful Portfolio</title> 
+    <style>
+        /* Your existing CSS styles */
+        body {
+            background: linear-gradient(to right, #f9f9f9, #e0e0e0);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background: linear-gradient(to right, #ff6661, #ffb74d);
+            color: white;
+            padding: 20px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+        header p {
+            margin: 0;
+            font-size: 20px;
+        }
+        section {
+            background-color: #ffffff;
+            padding: 40px;
+            margin: 20px auto;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        section h2 {
+            color: #ff6661;
+            margin-bottom: 20px;
+        }
+        section p {
+            color: #333;
+            line-height: 1.6;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        input, textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%;
+        }
+        button {
+background-color: #ff6661;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #ff4c4c;
+        }
+        footer {
+            background: linear-gradient(to right, #ff6661, #ffb74d);
+            color: white;
+            padding: 20px;
+        }
+        footer p {
+            margin: 0;
+        }
+        #responseMessage {
+            color: #ff6661;
+            margin-top: 20px;
+        }
+    </style> 
+</head> 
+<body> 
+    <!-- Header Section --> 
+    <header> 
+        <h1>Maneekho</h1> 
+        <p>A student and an aspiring future esports player</p> 
+    </header> 
+
+    <!-- Profile Section --> 
+    <section>
+        <img src="https://i.ibb.co/ySSYLkG/Highlight1.jpg" alt="Profile Picture" style="border-radius: 50%;width: 150px;height: 150px; object-fit: cover; margin-bottom: 20px;border: 5px solid #ff6f61;"> 
+        <h2>About Me</h2> 
+        <p>Hello! I'm Maneekho, a 9th grader who enjoys playing online games, drawing, baking cookies, and exploring the internet. I hope to be a professional esports player and love spending time with my pets!</p> 
+    </section> 
+
+    <!-- Contact Form Section --> 
+    <section> 
+        <h2>Contact Me</h2> 
+        <form id="contactForm" method="POST" action="send_email.php"> 
+  <input type="text" name="name" placeholder="Your Name" required> 
+            <input type="email" name="email" placeholder="Your Email" required> 
+            <textarea name="message" placeholder="Your Message" rows="4" required></textarea> 
+            <button type="submit">Send Message</button> 
+        </form> 
+        <p id="responseMessage"></p> 
+    </section> 
+
+    <!-- Footer Section --> 
+    <footer> 
+        <p>© 2024 Maneekho</p> 
+    </footer> 
+
+    <!-- Optional JavaScript to handle form submission -->
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            var form = event.target;
+            var formData = new FormData(form);
+
+            fetch('send_email.php', {
+                method: 'POST',
+                body: formData
+            }).then(function(response) {
+                return response.text();
+            }).then(function(text) {
+                document.getElementById('responseMessage').textContent = text;
+                form.reset(); // Reset form fields
+            }).catch(function(error) {
+                document.getElementById('responseMessage').textContent = 'An error occurred. Please try again.';
+            });
+        });
+    </script> 
+</body>
+</html>
